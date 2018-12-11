@@ -1,0 +1,15 @@
+#### Routine to Fill Basic Missing Data - Regressor
+def fill_missing_data_basic_reg(X_train, y_train, X_test):
+    rf_reg_est = ensemble.RandomForestRegressor(random_state = 42)
+    rf_reg_est.fit(X_train, y_train)
+    y_test = rf_reg_est.predict(X_test)
+    
+    return y_test
+
+#### Routine to Fill Basic Missing Data - Classifier
+def fill_missing_data_basic_class(X_train, y_train, X_test):
+    rf_class_est = ensemble.RandomForestClassifier(random_state = 42)
+    rf_class_est.fit(X_train, y_train)
+    y_test = rf_class_est.predict(X_test)
+    
+    return y_test

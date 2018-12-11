@@ -1,0 +1,31 @@
+from sklearn.datasets import load_iris
+from sklearn import svm
+from sklearn.grid_search import GridSearchCV
+import matplotlib.pyplot as plt
+import numpy as np
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+k=['rbf', 'linear','poly','sigmoid','precomputed']
+c= range(1,100)
+g=np.arange(1e-4,1e-2,0.0001)
+g=g.tolist()
+param_grid=dict(kernel=k, C=c, gamma=g)
+print param_grid
+svr=svm.SVC()
+grid = GridSearchCV(svr, param_grid, cv=5,scoring='accuracy')
+grid.fit(X, y)  
+print()
+print("Grid scores on development set:")
+print()  
+print grid.grid_scores_  
+print("Best parameters set found on development set:")
+print()
+print(grid.best_params_)
+print("Grid best score:")
+print()
+print (grid.best_score_)
+# create a list of the mean scores only
+grid_mean_scores = [result.mean_validation_score for result in grid.grid_scores_]
+print grid_mean_scores
